@@ -1,21 +1,19 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!-- 
+
     <menuitem id="menu_hospital_root"
-                name="Hospital"
-                sequence="0"/>
+            name="Hospitals"
+            sequence="0"/>
 
     <menuitem id="menu_patient_master"
-                name="Patient Details"
-                parent="menu_hospital_root"
-                sequence="0"/> -->
-<!-- 
-    <menuitem id="menu_patient"
-                name="Patient"
-                parent_id="menu_hospital_root"
-                action=""
-                groups=""
-                sequence="0"/>
-     -->
+            name="List of Patients"
+            parent="menu_hospital_root"
+            sequence="0"/>
+
+
+    <menuitem id="main_hospital_master"
+            name="Lists of Hospitals"
+            parent="menu_hospital_root"
+            sequence="0"/>
 
 </odoo>

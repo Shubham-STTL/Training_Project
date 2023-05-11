@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hospital_main_form" model="ir.ui.view">
+        <field name="name">hospital.main.form</field>
+        <field name="model">hospital.main</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_hospital_main" model="ir.actions.act_window">
+        <field name="name">Hospital</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.main</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">inline</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p> Hospital !!!</p> 
+        </field>
+    </record>
+    <menuitem id="menu_hospital"
+            name="Hospital_Details"
+            action="action_hospital_main"
+            parent="main_hospital_master"
+            sequence="0"/>
+
+</odoo>
