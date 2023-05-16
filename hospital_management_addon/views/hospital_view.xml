@@ -11,6 +11,7 @@
                         <group>
                             <field name="name"/>
                             <field name="address"/>
+                            <field name="phone"/>
                         </group>
                     </group>
                 </sheet>

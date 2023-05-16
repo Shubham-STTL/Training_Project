@@ -11,9 +11,11 @@ class HospitalPatient(models.Model):
 
     name = fields.Char(string="Name")
     dob = fields.Date(string="Date of Birth")
-    age = fields.Integer(compute='_compute_age', store=True, string="Age") #default=False#tracking=True #need to understand tracking #store=True  #to store the computed data
+    age = fields.Integer(compute='_compute_age', store=True, string="Age") #default=False#tracking=True #store=True  #to store the computed data
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string = 'Gender')
     hospital_id = fields.Many2one('hospital.main', string="Hospital")
+    address_hospital_fetch = fields.Text("address fetch", readonly=True)#,readonly=True [readonly is to just display - to store remove read_only] 
+    phone_hospital_fetch = fields.Text("phone fetch", readonly=True)
     active = fields.Boolean(string="Active", default=True)
     tag_ids = fields.Many2many('patient.tags', string="Tags")
     total = fields.Float(string="Total Float Example")
@@ -36,7 +38,12 @@ class HospitalPatient(models.Model):
             if record.age < 15:
                 raise ValidationError("cannot submit if age is less than 15")
 
-
+    @api.onchange('hospital_id')
+    def _onchange_address(self):
+        if self.hospital_id:
+            self.address_hospital_fetch = self.hospital_id.address
+            self.phone_hospital_fetch = self.hospital_id.phone
+            
 
 
 class HospitalPatientLine(models.Model):

@@ -85,6 +85,8 @@
                 <field name="tag_ids"/>
                 <field name="total"/>     
                 <field name="active"/>
+                <field name="address_hospital_fetch"/>
+                <field name="phone_hospital_fetch"/>
                 <field name="hospital_id"/>
             </tree>
         </field>
@@ -106,6 +108,8 @@
                             <field name="reference"/>
                             <field name="gender"/>
                             <field name="hospital_id"/>
+                            <field name="address_hospital_fetch"/>
+                            <field name="phone_hospital_fetch"/>
                         </group> 
 
 

@@ -9,4 +9,4 @@ class Appointment(models.Model):
 
     name = fields.Char(string="Name")
     address = fields.Text(string="Address")
-    contact_no = fields.Char(string="Phone")
+    phone = fields.Char(string="Phone")
