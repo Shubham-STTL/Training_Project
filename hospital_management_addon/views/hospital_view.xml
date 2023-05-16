@@ -8,13 +8,19 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="name"/>
-                            <field name="address"/>
-                            <field name="phone"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="address"/>
+                                <field name="phone"/>
+                            </group>    
+                           <group>
+                                <field name="city"/>
+                                <field name="email_id"/>
+                                <field name="website"/>
+                            </group>    
+
                         </group>
-                    </group>
-                </sheet>
+                </sheet>    
             </form>
         </field>
     </record>

@@ -20,7 +20,7 @@ class HospitalPatient(models.Model):
     tag_ids = fields.Many2many('patient.tags', string="Tags")
     total = fields.Float(string="Total Float Example")
     reference = fields.Text(string="Reference")
-    patient_line_ids = fields.One2many('hospital.patient.line', 'hospital_patient_id', string="Patient Lines")
+    patient_line_ids = fields.One2many('hospital.patient.line', 'patient_id', string="Patient Lines")
 
 
     @api.depends('dob')
@@ -50,7 +50,8 @@ class HospitalPatientLine(models.Model):
     _name = "hospital.patient.line"
     _description = "Hospital Patient Line"
 
-    name = fields.Char('name')
+    patient_id = fields.Many2one('hospital.patient')
+    appointment_date = fields.Date('appointment date')
     age = fields.Integer('Age')
-    city = fields.Char('City')
-    hospital_patient_id = fields.Many2one('hospital.patient')
+    prescription = fields.Text("Prescription")
+    note = fields.Char('note')

@@ -123,10 +123,16 @@
                     <notebook>
                         <page string="Patient Lines" name="patient_lines">
                             <field name="patient_line_ids">
-                                <tree>
-                                    <field name="name"/>
-                                    <field name="city"/>
-                                    <field name="age"/>
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_line_control" string="Add a line"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    
+                                    <field name="appointment_date"/>
+                                    <field name="prescription"/>
+                                    <field name="note"/>
                                 </tree>
                             </field>
                         </page>
@@ -135,6 +141,11 @@
             </form>
         </field>
     </record>
+                                    <!-- <field name="patient_id"/>
+                                    <field name="appointment_date"/>
+                                    <field name="note"/>
+                                    <field name="age"/> -->
+                                <!-- </tree> -->
     
     <record id="view_hospital_patient_search" model="ir.ui.view">
         <field name="name">hospital.patient.search</field>
