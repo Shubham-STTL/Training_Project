@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_patient_tags_tree" model="ir.ui.view">
+        <field name="name">patient.tags.tree</field>
+        <field name="model">patient.tags</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_patient_tags_form" model="ir.ui.view">
+        <field name="name">patient.tags.form</field>
+        <field name="model">patient.tags</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                            
+                    </group>
+                </sheet>    
+            </form>
+        </field>
+    </record>
+    
+<!--  
+    <record id="view_patient_tags_search" model="ir.ui.view">
+        <field name="name">patient.tags.search</field>
+        <field name="model">patient.tags</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Patient Name OR Ref OR hospital_id" filter_domain="['|','|',('name', 'ilike', self), ('reference', 'ilike', self), ('hospital_id', 'ilike', self)]"/>
+                <field name="reference"/>
+                <field name="age"/>
+                <field name="gender"/>  
+                <filter name="filter_male" string="Filter Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_female" string="Filter Female" domain="[('gender', '=', 'female')]"/>
+                <separator/> 
+                <filter name="filter_kids" string="Filter Kids" domain="[('age', '&lt;=', 8)]"/>
+                <separator/> 
+                <filter name="filter_archive" string="Filter Archive" domain="[('active', '=', 'False')]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+
+    <record id="action_patient_tags" model="ir.actions.act_window">
+        <field name="name">Patient Tags</field>
+        <field name="res_model">patient.tags</field>
+        <field name="view_mode">tree,form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p> TEST Create you first patient Tag!!!!</p> 
+        </field>
+    </record>
+
+    <menuitem 
+        id="menu_patient_tag"
+        name="Patient Tags"
+        action="action_patient_tags"
+        parent="menu_patient_master"
+        sequence="0 "/>
+
+</odoo>

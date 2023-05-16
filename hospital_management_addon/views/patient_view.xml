@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_hospital_patient_graph" model="ir.ui.view">
+        <field name="name">hospital.patient.graph</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <graph string="Patients Graph" sample="1">
+                <field name="name"/>
+                <field name="age" operator="+"/>
+                <field name="total" operator="+"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <record id="view_hospital_patient_kanban" model="ir.ui.view">
+        <field name="name">hospital.patient.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <!-- <field name="model_id"/> -->
+                <field name="dob"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                    Name : <field name="name"/>
+                                    </li>
+                                    <li>
+                                    DOB : <field name="dob"/>
+                                    </li>
+                                    <li>
+                                    Gender : <field name="gender"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_pivot" model="ir.ui.view">
+         <field name="name">hospital.patient.pivot</field>
+         <field name="model">hospital.patient</field>
+         <field name="arch" type="xml">
+             <pivot string="Patients Pivot" sample="1">
+                 <field name="name" type="row"/>
+                 <!-- <field name="dob" type="col"/> -->
+                 <field name="gender" type="col"/>
+                 <field name="hospital_id" type="col"/>
+                 <field name="dob" type="col"/>
+                 <!-- <field name="tag_ids" type="col"/> -->
+             </pivot>
+         </field>
+    </record>
+
+<!-- 
+    <record id="" model="ir.ui.view">
+         <field name="name"></field>
+         <field name="model"></field>
+         <field name="arch" type="xml">
+             <pivot string="" sample="1">
+                 <field name="" type="col"/>
+                 <field name="" type="row"/>
+                 <field name="" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+ -->
     <record id="view_hospital_patient_tree" model="ir.ui.view">
         <field name="name">hospital.patient.tree</field>
         <field name="model">hospital.patient</field>
@@ -9,6 +82,9 @@
                 <field name="reference"/>
                 <field name="gender"/>
                 <field name="age"/>
+                <field name="tag_ids"/>
+                <field name="total"/>     
+                <field name="active"/>
                 <field name="hospital_id"/>
             </tree>
         </field>
@@ -30,14 +106,32 @@
                             <field name="reference"/>
                             <field name="gender"/>
                             <field name="hospital_id"/>
-                        </group>
+                        </group> 
+
+
+                        <group>
+                            <field name="total"/>     
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="active" invisible="1"/>    
+                        </group>    
+
                     </group>
+                    <notebook>
+                        <page string="Patient Lines" name="patient_lines">
+                            <field name="patient_line_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="city"/>
+                                    <field name="age"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>    
             </form>
         </field>
     </record>
     
- 
     <record id="view_hospital_patient_search" model="ir.ui.view">
         <field name="name">hospital.patient.search</field>
         <field name="model">hospital.patient</field>
@@ -49,20 +143,21 @@
                 <field name="gender"/>  
                 <filter name="filter_male" string="Filter Male" domain="[('gender', '=', 'male')]"/>
                 <filter name="filter_female" string="Filter Female" domain="[('gender', '=', 'female')]"/>
-                <separator/> 
-                <filter name="filter_kids" string="Filter Kids" domain="[('age', '&lt;=', 8)]"/>
+                <separator/>        
+                <!-- <filter name="filter_age" string="Filter age" domain="[('age', '&lt;=', 8)]"/>
+                <separator/>  -->
+                <filter name="filter_archive" string="Filter Archive" domain="[('active', '=', 'False')]"/>
                 <group expand="0" string="Group By">
-                        <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
                 </group>
             </search>
         </field>
-    </record>
-
+    </record> 
 
     <record id="action_hospital_patient" model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">hospital.patient</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,graph,pivot</field>
         <field name="type">ir.actions.act_window</field>
         <field name="context">{}</field>
         <field name="help" type="html">

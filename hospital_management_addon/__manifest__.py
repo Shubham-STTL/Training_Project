@@ -15,6 +15,7 @@
         'views/menu.xml',
         'views/patient_view.xml',
         'views/hospital_view.xml',
+        'views/patient_tags.xml',
         ],
     'application': True,
     'installable': True,

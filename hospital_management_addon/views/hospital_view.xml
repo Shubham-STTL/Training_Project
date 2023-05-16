@@ -27,7 +27,7 @@
         </field>
     </record>
     <menuitem id="menu_hospital"
-            name="Hospital_Details"
+            name="Hospital Details"
             action="action_hospital_main"
             parent="main_hospital_master"
             sequence="0"/>
