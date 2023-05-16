@@ -51,11 +51,11 @@
          <field name="arch" type="xml">
              <pivot string="Patients Pivot" sample="1">
                  <field name="name" type="row"/>
-                 <!-- <field name="dob" type="col"/> -->
+                 <field name="dob" type="col"/>
                  <field name="gender" type="col"/>
                  <field name="hospital_id" type="col"/>
                  <field name="dob" type="col"/>
-                 <!-- <field name="tag_ids" type="col"/> -->
+                 <field name="tag_ids" type="col"/>
              </pivot>
          </field>
     </record>

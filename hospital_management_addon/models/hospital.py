@@ -8,3 +8,5 @@ class Appointment(models.Model):
     _description = "Hospital Main"
 
     name = fields.Char(string="Name")
+    address = fields.Text(string="Address")
+    contact_no = fields.Char(string="Phone")
