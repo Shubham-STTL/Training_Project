@@ -14,7 +14,7 @@ class HospitalPatient(models.Model):
     age = fields.Integer(compute='_compute_age', store=True, string="Age") #default=False#tracking=True #store=True  #to store the computed data
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string = 'Gender')
     hospital_id = fields.Many2one('hospital.main', string="Hospital")
-    address_hospital_fetch = fields.Text("address fetch", readonly=True)#,readonly=True [readonly is to just display - to store remove read_only] 
+    address_hospital_fetch = fields.Text("address fetch")#,readonly=True [readonly is to just display - to store remove read_only] 
     phone_hospital_fetch = fields.Text("phone fetch", readonly=True)
     active = fields.Boolean(string="Active", default=True)
     tag_ids = fields.Many2many('patient.tags', string="Tags")

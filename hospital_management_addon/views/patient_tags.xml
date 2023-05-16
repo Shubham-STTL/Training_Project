@@ -67,7 +67,7 @@
         id="menu_patient_tag"
         name="Patient Tags"
         action="action_patient_tags"
-        parent="menu_patient_master"
+        parent="main_tags_master"
         sequence="0 "/>
 
 </odoo>

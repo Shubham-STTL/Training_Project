@@ -44,6 +44,7 @@
             </kanban>
         </field>
     </record>
+    <!-- -->
 
     <record id="view_hospital_patient_pivot" model="ir.ui.view">
          <field name="name">hospital.patient.pivot</field>
@@ -184,7 +185,7 @@
         id="menu_patient"
         name="Patient Details"
         action="action_hospital_patient"
-        parent="menu_patient_master"
+        parent="main_hospital_master"
         sequence="0 "/>
 
 </odoo>

@@ -12,7 +12,12 @@
 
 
         <menuitem id="main_hospital_master"
-                name="Lists of Hospitals"
+                name="Hospitals"
+                parent="menu_hospital_root"
+                sequence="0"/>
+
+        <menuitem id="main_tags_master"
+                name="Tags"
                 parent="menu_hospital_root"
                 sequence="0"/>
 
