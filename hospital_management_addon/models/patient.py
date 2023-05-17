@@ -9,7 +9,7 @@ class HospitalPatient(models.Model):
     _description = "Hospital Patient"
     
 
-    name = fields.Char(string="Name")
+    name = fields.Char(string="Name", required=True)
     dob = fields.Date(string="Date of Birth")
     age = fields.Integer(compute='_compute_age', store=True, string="Age") #default=False#tracking=True #store=True  #to store the computed data
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string = 'Gender')
@@ -18,11 +18,23 @@ class HospitalPatient(models.Model):
     phone_hospital_fetch = fields.Text("phone fetch", readonly=True)
     active = fields.Boolean(string="Active", default=True)
     tag_ids = fields.Many2many('patient.tags', string="Tags")
+    tag_total = fields.Integer()
     total = fields.Float(string="Total Float Example")
     reference = fields.Text(string="Reference")
     patient_line_ids = fields.One2many('hospital.patient.line', 'patient_id', string="Patient Lines")
+    color = fields.Integer(string="color")
 
-
+    @api.model
+    def create(self, vals):
+        res = super(HospitalPatient, self.with_context()).create(vals)
+        if res.age >= 15:
+            print('Valid age')
+        print('\n\n\t\t\t   ---   RES  ---    ', res)
+        print('\n\n\t\t\t   ---   vals  ---    ', vals)
+        print('\n\n\t\t\t   ---   patient_line_ids  ---    ', res.patient_line_ids)
+        
+        return res
+        
     @api.depends('dob')
     def _compute_age(self):
         today = date.today()
