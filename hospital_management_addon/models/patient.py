@@ -18,7 +18,7 @@ class HospitalPatient(models.Model):
     phone_hospital_fetch = fields.Text("phone fetch", readonly=True)
     active = fields.Boolean(string="Active", default=True)
     tag_ids = fields.Many2many('patient.tags', string="Tags")
-    tag_total = fields.Integer()
+    tag_total = fields.Integer(string='tag_total')
     total = fields.Float(string="Total Float Example")
     reference = fields.Text(string="Reference")
     patient_line_ids = fields.One2many('hospital.patient.line', 'patient_id', string="Patient Lines")
@@ -29,11 +29,26 @@ class HospitalPatient(models.Model):
         res = super(HospitalPatient, self.with_context()).create(vals)
         if res.age >= 15:
             print('Valid age')
-        print('\n\n\t\t\t   ---   RES  ---    ', res)
-        print('\n\n\t\t\t   ---   vals  ---    ', vals)
-        print('\n\n\t\t\t   ---   patient_line_ids  ---    ', res.patient_line_ids)
+        #print('\n\n\t\t\t   ---   RES  ---    ', res)
+        ##print('\n\n\t\t\t   ---   vals  ---    ', vals)
+        #print('\n\n\t\t\t   ---   patient_line_ids  ---    ', res.patient_line_ids)
         
         return res
+    
+    #@api.model
+    def write(self, vals):
+        #print("WRITE EXEUCTING ")
+        #print('\t\t -- vals --- ', vals, 'vals')
+        #print('\t\t -- dir(vals) --- ', dir(vals), 'dir(vals)')
+        #list1 = vals.get('tag_ids')[0][2]
+        values = list(vals.values())
+        values_list = values[0][0][2]
+        tags_list = self.env['patient.tags'].search([('id', 'in', values_list)])
+        list_number = tags_list.mapped('number')
+        #print(list_number, 'list_number, ')
+        vals['tag_total'] = sum(list_number)
+        res = super(HospitalPatient, self.with_context()).write(vals) # write method should be called any the end every time after making updated in vals dictionary
+        ##return vals
         
     @api.depends('dob')
     def _compute_age(self):

@@ -130,6 +130,7 @@
                         <group>
                             <field name="total"/>     
                             <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="tag_total"/>
                             <field name="active" invisible="1"/>    
                         </group>    
 
