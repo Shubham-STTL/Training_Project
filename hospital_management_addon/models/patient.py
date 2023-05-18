@@ -42,14 +42,47 @@ class HospitalPatient(models.Model):
         #print('\t\t -- dir(vals) --- ', dir(vals), 'dir(vals)')
         #list1 = vals.get('tag_ids')[0][2]
         values = list(vals.values())
-        values_list = values[0][0][2]
-        tags_list = self.env['patient.tags'].search([('id', 'in', values_list)])
+        values_list = values[0][0][2]   
+        tags_list = self.env['patient.tags'].search([('id', 'in', values_list)]) 
         list_number = tags_list.mapped('number')
-        #print(list_number, 'list_number, ')
         vals['tag_total'] = sum(list_number)
         res = super(HospitalPatient, self.with_context()).write(vals) # write method should be called any the end every time after making updated in vals dictionary
-        ##return vals
         
+    def test_orm(self):
+        print("TEST ORM operations clicking")
+        #to search all fetch all the data from hospital.patient
+        search_method = self.env['hospital.patient'].search([])#.mapped('name')
+        print(search_method, 'search_method')
+        #get name field data from hospital.patient table that has been searched above
+        mapped_method = search_method.mapped('name')
+        print(mapped_method, 'mapped_method')
+        #sorting by id
+        sorted_method = search_method.sorted(lambda x: x.id)
+        print(sorted_method, 'sorted_method')
+        #sorting by write_date
+        sorted_method_write_date = search_method.sorted(lambda x: x.write_date)
+        print(sorted_method_write_date, 'sorted_method_write_date')
+        #reverse the sorted data from write_date field
+        sorted_method_write_date_reverse = search_method.sorted(lambda x: x.write_date, reverse=True)
+        print(sorted_method_write_date_reverse, 'sorted_method_write_date_reverse')
+        #filtered the data where active is True
+        sorted_method_filtered  = search_method.filtered(lambda x: x.active)
+        print(sorted_method_filtered, 'sorted_method_filtered')
+        #browse searches from the list of ids
+        browse_method = self.env['hospital.patient'].browse([45, 25, 22])#.mapped('name')
+        print(browse_method, 'browse_method')
+        for i in browse_method:
+            print(i.name)
+        
+        
+        #we can stack up mulitple field to search in a database
+        search_method = self.env['hospital.patient'].search([('gender', '=', 'male'), ('age', '>', '100')])#.mapped('name')
+        
+        
+        
+        
+        
+
     @api.depends('dob')
     def _compute_age(self):
         today = date.today()

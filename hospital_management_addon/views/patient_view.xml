@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="view_hospital_patient_graph" model="ir.ui.view">
         <field name="name">hospital.patient.graph</field>
         <field name="model">hospital.patient</field>
@@ -98,7 +99,7 @@
                 <field name="age"/>
                 <field name="tag_ids"/>
                 <field name="total"/>     
-                <field name="active"/>
+                <!-- <field name="active"/> -->
                 <field name="address_hospital_fetch"/>
                 <field name="phone_hospital_fetch"/>
                 <field name="hospital_id"/>
@@ -111,12 +112,16 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="test_orm" type="object" string="Test ORM operation" class="oe_highlight"></button>
+                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="dob"/>
                             <field name="age"/>
+                            <field name="active" invisible="1"/>
                         </group>    
                         <group>
                             <field name="reference"/>
@@ -125,15 +130,11 @@
                             <field name="address_hospital_fetch"/>
                             <field name="phone_hospital_fetch"/>
                         </group> 
-
-
                         <group>
                             <field name="total"/>     
                             <field name="tag_ids" widget="many2many_tags"/>
                             <field name="tag_total"/>
-                            <field name="active" invisible="1"/>    
-                        </group>    
-
+                        </group>
                     </group>
                     <notebook>
                         <page string="Patient Lines" name="patient_lines">
@@ -156,12 +157,7 @@
             </form>
         </field>
     </record>
-                                    <!-- <field name="patient_id"/>
-                                    <field name="appointment_date"/>
-                                    <field name="note"/>
-                                    <field name="age"/> -->
-                                <!-- </tree> -->
-    
+
     <record id="view_hospital_patient_search" model="ir.ui.view">
         <field name="name">hospital.patient.search</field>
         <field name="model">hospital.patient</field>
@@ -176,7 +172,7 @@
                 <separator/>        
                 <!-- <filter name="filter_age" string="Filter age" domain="[('age', '&lt;=', 8)]"/>
                 <separator/>  -->
-                <filter name="filter_archive" string="Filter Archive" domain="[('active', '=', 'False')]"/>
+                <filter name="filter_active" string="Filter active" domain="[('active', '=', 'False')]"/>
                 <group expand="0" string="Group By">
                     <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
                 </group>
