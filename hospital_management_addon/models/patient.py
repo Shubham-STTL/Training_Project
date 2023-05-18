@@ -35,6 +35,15 @@ class HospitalPatient(models.Model):
         
         return res
     
+    #@api.model        
+    def custom_unlink(self):
+        tags_list = self.env['hospital.patient'].search([('reference', '=', False)]) 
+        print(tags_list, 'tags_list, ')
+        tags_list.unlink()
+        
+        
+        
+    
     #@api.model
     def write(self, vals):
         #print("WRITE EXEUCTING ")
@@ -48,6 +57,7 @@ class HospitalPatient(models.Model):
         vals['tag_total'] = sum(list_number)
         res = super(HospitalPatient, self.with_context()).write(vals) # write method should be called any the end every time after making updated in vals dictionary
         
+
     def test_orm(self):
         print("TEST ORM operations clicking")
         #to search all fetch all the data from hospital.patient
