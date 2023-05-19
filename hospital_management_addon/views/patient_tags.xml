@@ -67,6 +67,7 @@
     <menuitem 
         id="menu_patient_tag"
         name="Patient Tags"
+        groups="hospital_management_addon.group_admin_access"
         action="action_patient_tags"
         parent="main_tags_master"
         sequence="0 "/>

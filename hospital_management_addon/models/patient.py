@@ -79,16 +79,16 @@ class HospitalPatient(models.Model):
         sorted_method_filtered  = search_method.filtered(lambda x: x.active)
         print(sorted_method_filtered, 'sorted_method_filtered')
         #browse searches from the list of ids
-        browse_method = self.env['hospital.patient'].browse([45, 25, 22])#.mapped('name')
-        print(browse_method, 'browse_method')
+        #browse_method = self.env['hospital.patient'].browse([45, 25, 22])#.mapped('name')
+        #print(browse_method, 'browse_method')
+        """
         for i in browse_method:
             print(i.name)
-        
-        
+        """
         #we can stack up mulitple field to search in a database
         search_method = self.env['hospital.patient'].search([('gender', '=', 'male'), ('age', '>', '100')])#.mapped('name')
-        
-        
+        #search_all = self.env['hospital.patient'].search([])
+        #filtered_example = search_all.filtered(lambda x: x.tag_total).read()    
         
         
         
