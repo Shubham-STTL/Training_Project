@@ -3,4 +3,4 @@ access_hospital_patient,hospital_patient,model_hospital_patient,,1,1,1,1
 access_hospital_main,hospital_main,model_hospital_main,,1,1,1,1
 access_patient_tags,patient_tags,model_patient_tags,,1,1,1,1
 access_hospital_patient_line,hospital_patient_line,model_hospital_patient_line,,1,1,1,1
-
+access_contact_info,contact_info,model_contact_info,,1,1,1,1

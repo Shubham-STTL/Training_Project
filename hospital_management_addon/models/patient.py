@@ -50,13 +50,17 @@ class HospitalPatient(models.Model):
         #print('\t\t -- vals --- ', vals, 'vals')
         #print('\t\t -- dir(vals) --- ', dir(vals), 'dir(vals)')
         #list1 = vals.get('tag_ids')[0][2]
-        values = list(vals.values())
-        values_list = values[0][0][2]   
-        tags_list = self.env['patient.tags'].search([('id', 'in', values_list)]) 
-        list_number = tags_list.mapped('number')
-        vals['tag_total'] = sum(list_number)
-        res = super(HospitalPatient, self.with_context()).write(vals) # write method should be called any the end every time after making updated in vals dictionary
-        
+        print(vals, "vals")
+        if vals.get('tag_ids'):
+            values = list(vals.get('tag_ids'))
+            print(values, 'values')
+            values_list = values[0][2]
+            tags_list = self.env['patient.tags'].search([('id', 'in', values_list)]) 
+            list_number = tags_list.mapped('number')
+            vals['tag_total'] = sum(list_number)
+            res = super(HospitalPatient, self.with_context()).write(vals) # write method should be called any the end every time after making updated in vals dictionary        
+        else:
+            res = super(HospitalPatient, self.with_context()).write(vals)
 
     def test_orm(self):
         print("TEST ORM operations clicking")

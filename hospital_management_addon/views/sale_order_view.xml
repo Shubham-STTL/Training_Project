@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            <data> 
+                
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="inherited_name"/>
+                </xpath>
+
+            </data>           
+            </field>
+        </record>
+
+        <record id="view_sale_stock_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+            <data> 
+                
+                <xpath expr="//label[@for='commitment_date']" position="before">
+                    <field name="inherited_name"/>
+                </xpath>
+
+            </data>           
+            </field>
+        </record>
+        <!--             
+
+        <record id="view_sale_order_form_herit" model="ir.ui.view">
+            <field name="name">sale.order.inherit.one.many</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            <data> 
+                
+                <xpath expr="//field[@name='payment_term_id']" position="before">
+                    <field name="inherited_sale_contact_ids"/>
+                </xpath>
+
+            </data>           
+            </field>
+        </record>
+         -->
+<!-- 
+        <record id="view_sale_order_form_herit" model="ir.ui.view">
+            <field name="name">sale.order.inherit.order.line</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data> 
+                    
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                        <field name="inherited_name"/>
+                    </xpath>
+                </data>           
+            </field>
+        </record>
+ -->
+
+        <record model="ir.ui.view" id="sale_order_view_inherit1">
+            <field name="name">sale.order.view.inherit1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="inherited_rejected_quantity"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_view_inherit2">
+            <field name="name">sale.order.view.inherit2</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='company_id']" position="after">
+                    <field name="inherited_sale_contact_ids"/>
+                </xpath>
+            </field>
+        </record>
+
+<!-- 
+        <record model="ir.ui.view" id="sale_order_view_inherit3">
+            <field name="name">sale.order.view.inherit3</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref=""/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='company_id']" position="after">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="TEST_state,draft,sent,sale,done,cancel" readonly="1"/>
+                </field>
+            </field>
+        </record>  -->
+
+    </data>
+</odoo>
