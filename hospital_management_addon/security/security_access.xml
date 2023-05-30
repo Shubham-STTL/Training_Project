@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+
+    <data>
+        <record id="my_group_custom_category" model="ir.module.category">
+            <field name="name">Hospital</field>
+        </record>
+
+        <record id="sub_custom_category" model="ir.module.category">
+            <field name="name">Hospital</field>
+            <field name="parent_id" ref="hospital_management_addon.my_group_custom_category"/>
+        </record>
+        
+        <record id="access_user_profile_group" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="hospital_management_addon.sub_custom_category"/>
+            <!-- <field name="implied_ids" eval="[(6, ref(''))]"/> -->
+        </record>
+
+        <record id="group_admin_access" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="hospital_management_addon.sub_custom_category"/>
+            <field name="implied_ids" eval="[(6,0,[ref('hospital_management_addon.access_user_profile_group')])]"/>
+        </record>
+
+    </data>
+</odoo>

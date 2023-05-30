@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hospital_patient_graph" model="ir.ui.view">
+        <field name="name">hospital.patient.graph</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <graph string="Patients Graph" sample="1">
+                <field name="name"/>
+                <field name="age" operator="+"/>
+                <field name="total" operator="+"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <record id="view_hospital_patient_kanban" model="ir.ui.view">
+        <field name="name">hospital.patient.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="color"/>
+                <field name="name"/>
+                <!-- <field name="model_id"/> -->
+                <field name="dob"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_card oe_kanban_global_click oe_applicant_kanban oe_semantic_html_override">    
+                            <div class="o_dropdown_kanban dropdown">
+                                <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                    <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                    <div role="separator" class="dropdown-divider"/>
+                                    <ul class="oe_kanban_colorpicker text-center" data-field="color"/>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_details">
+                                
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- <ul>
+                                    <li>
+                                    Name : <field name="name"/>
+                                    </li>
+                                    Name : <field name="color"/>
+                                    <li>
+                                    DOB : <field name="dob"/>
+                                    </li>
+                                    <li>
+                                    Gender : <field name="gender"/>
+                                    </li>
+                                </ul>-->
+
+    <record id="view_hospital_patient_pivot" model="ir.ui.view">
+         <field name="name">hospital.patient.pivot</field>
+         <field name="model">hospital.patient</field>
+         <field name="arch" type="xml">
+             <pivot string="Patients Pivot" sample="1">
+                 <field name="name" type="row"/>
+                 <field name="dob" type="col"/>
+                 <field name="gender" type="col"/>
+                 <field name="hospital_id" type="col"/>
+                 <field name="dob" type="col"/>
+                 <field name="tag_ids" type="col"/>
+             </pivot>
+         </field>
+    </record>
+
+<!-- 
+    <record id="" model="ir.ui.view">
+         <field name="name"></field>
+         <field name="model"></field>
+         <field name="arch" type="xml">
+             <pivot string="" sample="1">
+                 <field name="" type="col"/>
+                 <field name="" type="row"/>
+                 <field name="" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+ -->
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <header>
+                    <button name="custom_unlink" string="No Ref Delete" type="object"></button>
+                </header>
+                <field name="name"/>
+                <field name="reference"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="tag_ids"/>
+                <field name="total"/>     
+                <!-- <field name="active"/> -->
+                <field name="address_hospital_fetch"/>
+                <field name="phone_hospital_fetch"/>
+                <field name="hospital_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="test_orm" type="object" string="Test ORM operation" class="oe_highlight"></button>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <field name="active" invisible="1"/>
+                        </group>    
+                        <group>
+                            <field name="reference"/>
+                            <field name="gender"/>
+                            <field name="hospital_id"/>
+                            <field name="address_hospital_fetch"/>
+                            <field name="phone_hospital_fetch"/>
+                        </group> 
+                        <group>
+                            <field name="total"/>     
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="tag_total"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Patient Lines" name="patient_lines">
+                            <field name="patient_line_ids">
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_line_control" string="Add a line"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    
+                                    <field name="appointment_date"/>
+                                    <field name="prescription"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>    
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Patient Name OR Ref OR hospital_id" filter_domain="['|','|',('name', 'ilike', self), ('reference', 'ilike', self), ('hospital_id', 'ilike', self)]"/>
+                <field name="reference"/>
+                <field name="age"/>
+                <field name="gender"/>  
+                <filter name="filter_male" string="Filter Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_female" string="Filter Female" domain="[('gender', '=', 'female')]"/>
+                <separator/>        
+                <!-- <filter name="filter_age" string="Filter age" domain="[('age', '&lt;=', 8)]"/>
+                <separator/>  -->
+                <filter name="filter_active" string="Filter active" domain="[('active', '=', 'False')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record> 
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p> TEST Create you first patient!!</p> 
+        </field>
+    </record>
+
+    <menuitem 
+        id="menu_patient"
+        name="Patient Details"
+        action="action_hospital_patient"
+        parent="main_hospital_master"
+        sequence="0 "/>
+
+</odoo>
