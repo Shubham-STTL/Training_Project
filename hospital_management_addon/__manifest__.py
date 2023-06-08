@@ -13,12 +13,12 @@
     'data': [
         'security/security_access.xml',
         'security/ir.model.access.csv',
+        'wizard/prescription_wizard_view.xml',
         'views/menu.xml',
         'views/patient_view.xml',
         'views/hospital_view.xml',
         'views/patient_tags.xml',
         'views/sale_order_view.xml',
-        #'views/sale_order_line.xml',
         ],
     'application': True,
     'installable': True,
