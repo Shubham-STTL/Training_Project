@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+        <template id ="patient_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <center>
+                                <h1> Patient Report </h1>
+                            </center>
+                            <label for="name">Name:-</label>
+                            <span id='name' t-field="doc.name"></span>
+                            <br/>
+                            <label for="age">Age:-</label>
+                            <span id='age' t-field="doc.age"></span>
+                            <br/>
+                            <label for="gender">Gender:-</label>
+                            <span id='gender' t-field="doc.age"></span>
+                            <span t-field="doc.gender"></span>
+                            <br/>
+                            <table style="border: 1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black;">Patient</th>
+                                        <th style="border: 1px solid black;">Prescription</th>
+                                        <th style="border: 1px solid black;">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.patient_line_ids" t-as="object">
+                                        <tr>
+                                            <td style="border: 1px solid black;"><span t-field="object.appointment_date"/></td>
+                                            <td style="border: 1px solid black;"><span t-field="object.prescription"/></td>
+                                            <td style="border: 1px solid black;"><span t-field="object.note"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>     
+            </t>
+        </template> 
+    </data>
+
+    <report 
+        id='doctor_patient_report_id'
+        model="hospital.patient"
+        report_type="qweb-pdf"
+        string="Print Data"
+        name="hospital_management_addon.patient_report_template"
+        file="hospital_management_addon.patient_report_template"
+    />
+</odoo>

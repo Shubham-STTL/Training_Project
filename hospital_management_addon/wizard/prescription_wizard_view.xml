@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_prescription_wizard_form" model="ir.ui.view">
+        <field name="name">prescription.wizard.form</field>
+        <field name="model">prescription.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="patient_id"/>
+                        <field name="prescription_text"/>
+                        <field name="appointment_date"/>
+                        <field name="note"/>
+                    </group>
+                    <footer>
+                            <button name="save_prescription" string="Create Prescription" type="object" class="btn-primary" />
+                            <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_prescription_wizard" model="ir.actions.act_window">
+        <field name="name">Prescription Wizard</field>
+        <field name="res_model">prescription.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p> TEST Create you Prescription with wizard!!!!</p> 
+        </field>
+    </record>
+<!-- 
+    <menuitem 
+        id="menu_prescription_wizard"
+        name="Prescription Wizard"
+        action="action_patient_tags"
+        parent="main_tags_master"
+        sequence="0 "/> -->
+
+</odoo>

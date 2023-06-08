@@ -8,18 +8,33 @@
             <form>
                 <sheet>
                     <group>
-                            <group>
-                                <field name="name"/>
-                                <field name="address"/>
-                                <field name="phone"/>
-                            </group>    
-                           <group>
-                                <field name="city"/>
-                                <field name="email_id"/>
-                                <field name="website"/>
-                            </group>    
-
-                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="phone"/>
+                        </group>    
+                        <group>
+                            <field name="city"/>
+                            <field name="email_id"/>
+                            <field name="website"/>
+                        </group>    
+                    </group>
+                    <notebook>
+                        <page string="Patient Lines" name="patient_lines_hospital">
+                            <field name="prescription_detail">
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_line_control" string="Add a line"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    <field name="patient_id"/>
+                                    <field name="appointment_date"/>
+                                    <field name="prescription"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>    
             </form>
         </field>

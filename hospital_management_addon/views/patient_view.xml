@@ -117,6 +117,8 @@
             <form>
                 <header>
                     <button name="test_orm" type="object" string="Test ORM operation" class="oe_highlight"></button>
+                    <button id="button_prescription" name="%(hospital_management_addon.action_prescription_wizard)d" string="Prescription Button" type="action" class="oe_highlight"></button>
+                    <!-- <button name="save_prescription" string="Prescription" type="action" class="oe_highlight"></button> -->
                 </header>
                 <sheet>
                     <group>
@@ -139,8 +141,9 @@
                             <field name="tag_total"/>
                         </group>
                     </group>
+           
                     <notebook>
-                        <page string="Patient Lines" name="patient_lines">
+                        <page string="Prescription Lines" name="patient_lines_patient">
                             <field name="patient_line_ids">
                                 <tree editable="bottom">
                                     <control>
@@ -148,7 +151,7 @@
                                         <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
                                         <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
                                     </control>
-                                    
+                                    <field name="patient_id"/>  
                                     <field name="appointment_date"/>
                                     <field name="prescription"/>
                                     <field name="note"/>

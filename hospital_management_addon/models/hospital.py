@@ -13,3 +13,5 @@ class HospitalMain(models.Model):
     city = fields.Char(string="City")
     email_id = fields.Char(string="Email")
     website = fields.Char(string="website")
+    prescription_detail = fields.One2many('hospital.patient.line', 'hospital_main_line')
+    patient_detail = fields.One2many('hospital.patient', 'hospital_id')

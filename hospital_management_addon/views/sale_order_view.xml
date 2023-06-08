@@ -31,6 +31,20 @@
             </data>           
             </field>
         </record>
+       
+        <record id="view_sale_contact_id_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.contact.id.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+            <data> 
+            
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="inherited_sale_contact_ids"/>
+                </xpath>
+            </data>           
+            </field>
+        </record> 
         <!--             
 
         <record id="view_sale_order_form_herit" model="ir.ui.view">

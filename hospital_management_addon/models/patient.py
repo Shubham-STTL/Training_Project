@@ -23,6 +23,7 @@ class HospitalPatient(models.Model):
     reference = fields.Text(string="Reference")
     patient_line_ids = fields.One2many('hospital.patient.line', 'patient_id', string="Patient Lines")
     color = fields.Integer(string="color")
+    #patient_list = fields.One2many('hospital.main', 'patient_detail', string=)
 
     @api.model
     def create(self, vals):
@@ -126,6 +127,6 @@ class HospitalPatientLine(models.Model):
 
     patient_id = fields.Many2one('hospital.patient')
     appointment_date = fields.Date('appointment date')
-    age = fields.Integer('Age')
     prescription = fields.Text("Prescription")
     note = fields.Char('note')
+    hospital_main_line = fields.Many2one('hospital.main')
