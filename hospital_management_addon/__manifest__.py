@@ -19,6 +19,7 @@
         'views/hospital_view.xml',
         'views/patient_tags.xml',
         'views/sale_order_view.xml',
+        'reports/patient_report.xml',
         ],
     'application': True,
     'installable': True,
