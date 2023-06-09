@@ -16,12 +16,15 @@
                             <span id='age' t-field="doc.age"></span>
                             <br/>
                             <label for="gender">Gender:-</label>
-                            <span id='gender' t-field="doc.age"></span>
-                            <span t-field="doc.gender"></span>
+                            <span id='gender' t-field="doc.gender"></span>
                             <br/>
+                            <label for="hospital">Hospital:-</label>
+                            <span id='hospital' t-field="doc.hospital_id.name"></span>
+                            
                             <table style="border: 1px solid black;">
                                 <thead>
                                     <tr>
+                                        <!-- <th style="border: 1px solid black;">Hospital</th> -->
                                         <th style="border: 1px solid black;">Patient</th>
                                         <th style="border: 1px solid black;">Prescription</th>
                                         <th style="border: 1px solid black;">Notes</th>
@@ -30,6 +33,7 @@
                                 <tbody>
                                     <t t-foreach="doc.patient_line_ids" t-as="object">
                                         <tr>
+                                            <!-- <td style="border: 1px solid black;"><span t-field="object.hospital_main_line.name"/></td> -->
                                             <td style="border: 1px solid black;"><span t-field="object.appointment_date"/></td>
                                             <td style="border: 1px solid black;"><span t-field="object.prescription"/></td>
                                             <td style="border: 1px solid black;"><span t-field="object.note"/></td>
