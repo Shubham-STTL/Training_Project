@@ -47,18 +47,6 @@
             </kanban>
         </field>
     </record>
-    <!-- <ul>
-                                    <li>
-                                    Name : <field name="name"/>
-                                    </li>
-                                    Name : <field name="color"/>
-                                    <li>
-                                    DOB : <field name="dob"/>
-                                    </li>
-                                    <li>
-                                    Gender : <field name="gender"/>
-                                    </li>
-                                </ul>-->
 
     <record id="view_hospital_patient_pivot" model="ir.ui.view">
          <field name="name">hospital.patient.pivot</field>
@@ -75,19 +63,6 @@
          </field>
     </record>
 
-<!-- 
-    <record id="" model="ir.ui.view">
-         <field name="name"></field>
-         <field name="model"></field>
-         <field name="arch" type="xml">
-             <pivot string="" sample="1">
-                 <field name="" type="col"/>
-                 <field name="" type="row"/>
-                 <field name="" type="measure"/>
-             </pivot>
-         </field>
-    </record>
- -->
     <record id="view_hospital_patient_tree" model="ir.ui.view">
         <field name="name">hospital.patient.tree</field>
         <field name="model">hospital.patient</field>

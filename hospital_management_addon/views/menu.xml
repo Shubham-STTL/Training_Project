@@ -26,4 +26,9 @@
                 parent="menu_hospital_root"
                 action="action_prescription_wizard"
                 sequence="0"/>
+        
+        <menuitem id="main_feedback_master"
+                name="Feedback"
+                parent="menu_hospital_root"
+                sequence="0"/>
 </odoo>
