@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="feedback_success_template" name="Feedback Success Page">
+            <t t-call="website.layout">
+                <div class="container mt-5">
+                    <h1 class="text-center">Feedback Submitted Successfully</h1>
+                    <p class="text-center">Thank you for your feedback!</p>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
