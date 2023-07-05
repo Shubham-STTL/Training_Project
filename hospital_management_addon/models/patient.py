@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta, date
-from odoo import api, fields, models
+from odoo import api, fields, models, http
 from datetime import date
 from odoo.exceptions import ValidationError
-
+from odoo.addons.portal.controllers import portal
+from odoo.http import request
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"
@@ -94,10 +95,7 @@ class HospitalPatient(models.Model):
         search_method = self.env['hospital.patient'].search([('gender', '=', 'male'), ('age', '>', '100')])#.mapped('name')
         #search_all = self.env['hospital.patient'].search([])
         #filtered_example = search_all.filtered(lambda x: x.tag_total).read()    
-        
-        
-        
-
+  
     @api.depends('dob')
     def _compute_age(self):
         today = date.today()
@@ -120,7 +118,6 @@ class HospitalPatient(models.Model):
             self.phone_hospital_fetch = self.hospital_id.phone
             
 
-
 class HospitalPatientLine(models.Model):
     _name = "hospital.patient.line"
     _description = "Hospital Patient Line"
@@ -130,3 +127,25 @@ class HospitalPatientLine(models.Model):
     prescription = fields.Text("Prescription")
     note = fields.Char('note')
     hospital_main_line = fields.Many2one('hospital.main')
+
+
+class Website_Patient(http.Controller):
+    @http.route('/my/patients/', type='http', auth="public", website=True)
+    def website_my_patients(self, page=1,**kwargs):
+        patients_list = http.request.env["hospital.patient"].search([])
+        return request.render("hospital_management_addon.portal_my_patients", {'patients_list': patients_list})
+
+
+
+    # for showing patient details
+    @http.route('/my/patients/<model("hospital.patient"):patient>/', auth='public', website=True)
+    def patient_details(self, patient):
+        return request.render("hospital_management_addon.display_patient_details", {'patient': patient,}) #'page_name': 'patient'})
+
+
+class AllPatientsPortal(portal.CustomerPortal):
+    def _prepare_home_portal_values(self, counters):
+        values = super(AllPatientsPortal, self)._prepare_home_portal_values(counters)
+        count_patients = http.request.env['hospital.patient'].search_count([])
+        values.update({'count_patients' : count_patients,})
+        return values

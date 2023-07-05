@@ -9,7 +9,7 @@
     'sequence': -100,
     "website": "https://www.silvertouch.com",
     "description": """TEST description of Hospital managements Team""",
-    'depends': ['base', 'sale', 'sale_stock', 'sale_management', 'website'],
+    'depends': ['base', 'sale', 'sale_stock', 'sale_management', 'website', 'portal'],
     'data': [
         'security/security_access.xml',
         'security/ir.model.access.csv',
@@ -22,6 +22,7 @@
         'views/feedback_view.xml',
         'views/feedback_success_page.xml',
         'reports/patient_report.xml',
+        'views/website_inherit_patient_tab.xml',
         ],
     'application': True,
     'installable': True,

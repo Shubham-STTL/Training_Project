@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="website_patient_list_view" inherit_id="portal.portal_my_home" customize_show="True">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Patients</t>
+                    <t t-set="url" t-value="'/my/patients'"/>
+                    <t t-set="placeholder_count" t-value="'count_patients'"/>
+                </t>
+            </xpath>
+        </template>
+        <template id="portal_my_patients" name="My Patients">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Patients</t>
+                </t>
+                <t t-if="not patients_list">
+                    <p>There are currently no quotations for your account.</p>
+                </t>
+                <t t-if="patients_list" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Patients</th>
+                            <th class="text-left">Age</th>
+                            <th class="text-left">Gender</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="patients_list" t-as="patient">
+                        <tr>
+                            <!-- <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td> -->
+                            <td> <a t-attf-href="/my/patients/{{ slug(patient) }}"><t t-esc="patient.name"/></a></td> 
+                            <!-- class="text-left"><span t-field="patient.name"/></td> -->
+                            <td class="text-left"><span t-field="patient.age"/></td>
+                            <td class="text-left"><span t-field="patient.gender"/></td>
+<!--                             
+                            <td class="text-center">
+                                <span t-if="quotation.state == 'cancel'" class="badge badge-pill badge-secondary"><i class="fa fa-fw fa-remove"/> Cancelled</span>
+                                <span t-if="quotation.is_expired" class="badge badge-pill badge-secondary"><i class="fa fa-fw fa-clock-o"/> Expired</span>
+                            </td>
+                             <td class="text-right"> -->
+                             <!-- <span t-field="quotation.amount_total"/> 
+                            </td> -->
+                        </tr>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <!-- for patient details page -->
+        <template id="display_patient_details" name="Patient">
+            <t t-call="portal.portal_layout">
+                <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
+                    <t t-call="portal.portal_back_in_edit_mode">
+                        <t t-set="backend_url" t-value="'/web#model=hospital.patient&amp;id=%s&amp;view_type=form' % (patient.id)"/>
+                    </t>
+                </t>
+                <t t-call="portal.portal_record_layout">
+                    <t t-set="card_header">
+                        <h5 class='mb-0'>
+                            <small class='text-muted'>Patient - </small><span t-field='patient.name'/>
+                            <span class='float-right'></span>
+                        </h5>
+                    </t>
+                    <t t-set='card_body'>
+                        <!-- <h3 t-field='patient.name'/> -->
+                        <small class='text-muted'>Description - </small><p t-field='patient.name'/>
+                        <span>DOB : </span><t t-esc='patient.dob'/><br/>
+                        <span>Age : </span><t t-esc="patient.age or 'Not Provided'"/><br/>
+                        <span>Gender : </span><t t-esc="patient.gender or 'Not Provided'"/><br/>
+                        <span>Hospital : </span><t t-esc="patient.address_hospital_fetch or 'Not Provided'"/><br/>
+                        <!-- <span>Hospital : </span><t t-esc="patient.hospital_id.name or 'Not Provided'"/><br/> -->
+                    </t>
+
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

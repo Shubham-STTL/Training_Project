@@ -92,6 +92,7 @@
             <form>
                 <header>
                     <button name="test_orm" type="object" string="Test ORM operation" class="oe_highlight"></button>
+                    <!-- <button name="patient_count" type="object" string="Patient operation" class="oe_highlight"></button> -->
                     <button id="button_prescription" name="%(hospital_management_addon.action_prescription_wizard)d" string="Prescription Button" type="action" class="oe_highlight"></button>
                     <!-- <button name="save_prescription" string="Prescription" type="action" class="oe_highlight"></button> -->
                 </header>
